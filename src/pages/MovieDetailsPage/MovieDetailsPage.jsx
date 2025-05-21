@@ -10,6 +10,9 @@ export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+
+  const backLinkRef = useRef(location.state?.from || '/movies');
+
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
@@ -17,10 +20,10 @@ export default function MovieDetailsPage() {
   }, [movieId]);
 
   const handleGoBack = () => {
-    navigate(location.state?.from || '/movies');
+    navigate(backLinkRef.current);
   };
 
-  if (!movie) return <div>Loading...</div>;
+  if (!movie) return <div>Loading movie details...</div>;
 
   return (
     <div>
@@ -34,6 +37,7 @@ export default function MovieDetailsPage() {
         alt={movie.title}
         width={250}
       />
+
       <h3>Additional information</h3>
       <ul>
         <li>
@@ -43,6 +47,7 @@ export default function MovieDetailsPage() {
           <Link to="reviews" state={location.state}>Reviews</Link>
         </li>
       </ul>
+
       <Suspense fallback={<div>Loading section...</div>}>
         <Routes>
           <Route path="cast" element={<MovieCast />} />

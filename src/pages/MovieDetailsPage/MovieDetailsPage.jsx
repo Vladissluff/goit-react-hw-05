@@ -1,4 +1,4 @@
-import { useParams, useNavigate, useLocation, Routes, Route, Link } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Routes, Route, Link, Outlet } from 'react-router-dom';
 import { useEffect, useState, Suspense, useRef, lazy } from 'react';
 import { getMovieDetails } from '../../services/ApiKey';
 
